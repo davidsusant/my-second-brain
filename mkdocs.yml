@@ -6,8 +6,4 @@ theme:
     - search.suggest
 nav:
   - Home: index.md
-  - Automation:
-      - Allure Lifecycle: automation/allure-lifecycle.md
-      - Cucumber + JUnit 5: automation/cucumber-junit5.md
-  - TDM:
-      - Architecture: tdm/architecture.md
+  - Maven: build-tools/maven.md
