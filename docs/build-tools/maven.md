@@ -70,3 +70,75 @@ mvn archetype:generate \
   | `maven-archetype-plugin`      | Skeleton for building a Maven plugin                                                 |
   | `maven-archetype-site`        | Project with Maven site documentation setup                                          |
   | `maven-archetype-profiles`    | Starter demonstrating build profiles                                                 |
+
+## Standard Directory Structure
+
+```plain
+api-test/
+├── pom.xml
+└── src/
+    ├── main/
+    │   ├── java/
+    │   └── resources/
+    └── test/
+        ├── java/
+        └── resources/
+```
+
+## Minimal `pom.xml` (Java 17, JUnit 5)
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.davidsusanto</groupId>
+    <artifactId>api-test</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>5.10.2</junit.version>
+        <surefire.version>3.2.5</surefire.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven.surefire.plugin</artifactId>
+                <version>{$surefire.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+```
+
+## Core Lifecycle Commands
+
+| Command               | Purpose                                                                                   |
+| --------------------- | ----------------------------------------------------------------------------------------- |
+| `mvn clean`           | Remove `target/`                                                                          |
+| `mvn compile`         | Compile `src/main/java`                                                                   |
+| `mvn test`            | Run unit tests                                                                            |
+| `mvn package`         | Build JAR                                                                                 |
+| `mvn install`         | Install to local repo (`~/.m2/repository`)                                                |
+| `mvn clean install`   | Full clean build (your standard verification)                                             |
+| `mvn dependency:tree` | Inspect transitive dependencies -- useful for the version conflicts you've been resolving |
