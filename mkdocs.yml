@@ -6,4 +6,5 @@ theme:
     - search.suggest
 nav:
   - Home: index.md
-  - Maven: build-tools/maven.md
+  - Build Tools:
+      - Maven: build-tools/maven.md
