@@ -32,7 +32,7 @@ mvn archetype:generate \
     -DgroupId=io.davidsusanto \
     -DartifactId=api-test \
     -DarchetypeArtifactId=maven-archetype-quickstart \
-    -DarchetypeVersion=1.4 \
+    -DarchetypeVersion=1.5 \
     -DinteractiveMode=false
 ```
 
@@ -55,8 +55,17 @@ mvn archetype:generate \
   ```bash
   -DarchetypeGroupId=org.apache.maven.archetypes
   -DarchetypeArtifactId=maven-archetype-quickstart
-  -DarchetypeVersion=1.4
+  -DarchetypeVersion=1.5
   ```
+
+- `maven-archetype-quickstart` release history:
+
+  | Version      | Notable changes                                                                                                                               |
+  | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+  | `1.0`, `1.1` | Original, very old releases (JUnit 3.8.x)                                                                                                     |
+  | `1.3`        | JUnit 4                                                                                                                                       |
+  | `1.4`        | Junit 4.11, modernized POM                                                                                                                    |
+  | `1.5`        | Latest, published 2024-08-20 -- defaults to Java 17 and JUnit 5.11.0, also generates a `.mvn/` directory with `jvm.config` and `maven.config` |
 
 - Common official Apache archetypes:
 
@@ -89,20 +98,23 @@ api-test/
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+             http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.davidsusanto</groupId>
     <artifactId>api-test</artifactId>
-    <version>1.0.0</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.version>5.10.2</junit.version>
-        <surefire.version>3.2.5</surefire.version>
+        <junit.version>5.11.4</junit.version>
+        <surefire.version>3.5.2</surefire.version>
     </properties>
 
     <dependencies>
@@ -130,6 +142,21 @@ api-test/
     </build>
 </project>
 ```
+
+- `junit-jupier` -- your test execution engine. Without it, `src/test/java` has no framework to run tests against. `junit-jupiter` is an aggregator artifact that pulls in three pieces:
+
+  | Pulled-in artifact     | Purpose                                                                            |
+  | ---------------------- | ---------------------------------------------------------------------------------- |
+  | `junit-jupiter-api`    | The annotations and assertions you write tests with (`@Test`, `assertEquals`, etc) |
+  | `junit-jupiter-params` | Parameterized test support (`@ParameterizedTest`)                                  |
+  | `junit-jupiter-engine` | The runtime that actually discovers and executes Jupiter tests                     |
+
+- `maven-surefire-plugin` -- the plugin Maven uses during the `test` phase to discover and run tests.
+- The `maven-compiler-plugin` is there for the same reason: pin the version so builds are reproducible.
+- It's the smallest set that lets you do `mvn test` reliably and get predictable behavior. You need:
+  - A test framework (Jupiter)
+  - A way to run it (Surefire)
+  - A way to compile sources to your target Java version (Compiler plugin)
 
 ## Core Lifecycle Commands
 

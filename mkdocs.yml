@@ -9,4 +9,6 @@ nav:
   - MkDocs: mkdocs/mkdocs.md
   - Git: git/git.md
   - Build Tools:
+      - Build Tools: build-tools/build-tools.md
       - Maven: build-tools/maven.md
+      - Gradle: build-tools/gradle.md
