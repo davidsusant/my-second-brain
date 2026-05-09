@@ -6,6 +6,7 @@ theme:
     - search.suggest
 nav:
   - Home: index.md
+  - MkDocs: mkdocs/mkdocs.md
   - Build Tools:
       - Maven: build-tools/maven.md
   - MkDocs
