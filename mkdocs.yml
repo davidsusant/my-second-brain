@@ -8,3 +8,4 @@ nav:
   - Home: index.md
   - Build Tools:
       - Maven: build-tools/maven.md
+  - MkDocs
