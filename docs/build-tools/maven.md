@@ -136,7 +136,7 @@ api-test/
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven.surefire.plugin</artifactId>
-                <version>{$surefire.version}</version>
+                <version>${surefire.version}</version>
             </plugin>
         </plugins>
     </build>
