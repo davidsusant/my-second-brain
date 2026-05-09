@@ -2,6 +2,4 @@ This repo is my personal knowledge base built with [MkDocs Material](https://squ
 
 A portal for ideas, notes, and reference docs.
 
-# Live Site
-
-Hosted at: `https://davidsusanto.github.io/my-second-brain`
+Live site hosted at: `https://davidsusanto.github.io/my-second-brain`

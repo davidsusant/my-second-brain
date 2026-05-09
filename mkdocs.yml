@@ -7,5 +7,6 @@ theme:
 nav:
   - Home: index.md
   - MkDocs: mkdocs/mkdocs.md
+  - Git: git/git.md
   - Build Tools:
       - Maven: build-tools/maven.md
