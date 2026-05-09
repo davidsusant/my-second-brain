@@ -9,4 +9,3 @@ nav:
   - MkDocs: mkdocs/mkdocs.md
   - Build Tools:
       - Maven: build-tools/maven.md
-  - MkDocs
