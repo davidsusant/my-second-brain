@@ -1,0 +1,1223 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../build-tools/">
+      
+      
+        <link rel="next" href="../gradle/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Maven - My Second Brain</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#maven" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="My Second Brain" class="md-header__button md-logo" aria-label="My Second Brain" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            My Second Brain
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Maven
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../mkdocs/mkdocs/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  MkDocs
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../git/git/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Git
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../build-tools/" class="md-tabs__link">
+          
+  
+  
+  Build Tools
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../microservices/microservices/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Microservices
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="My Second Brain" class="md-nav__button md-logo" aria-label="My Second Brain" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    My Second Brain
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mkdocs/mkdocs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MkDocs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../git/git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Git
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build Tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Build Tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../build-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generate-a-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generate a Project
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#standard-directory-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standard Directory Structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minimal-pomxml-java-17-junit-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Minimal pom.xml (Java 17, JUnit 5)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-lifecycle-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Lifecycle Commands
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maven-entries-for-gitignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maven entries for .gitignore
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-not-to-ignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What NOT to ignore
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gradle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gradle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../microservices/microservices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Microservices
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generate-a-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generate a Project
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#standard-directory-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standard Directory Structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#minimal-pomxml-java-17-junit-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Minimal pom.xml (Java 17, JUnit 5)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-lifecycle-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core Lifecycle Commands
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maven-entries-for-gitignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Maven entries for .gitignore
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-not-to-ignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What NOT to ignore
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="maven">Maven</h1>
+<h2 id="install">Install</h2>
+<ul>
+<li>Download from: https://maven.apache.org</li>
+<li>Extract</li>
+<li>Set environment variables:</li>
+</ul>
+<p><code>bash
+  export M2_HOME=/path/to/apache-maven-3.9.x
+  export PATH=$M2_HOME/bin:$PATH</code></p>
+<p>Those two lines configure Maven on your shell's <code>PATH</code> so you can run <code>mvn</code> from any directory.</p>
+<p><code>M2_HOME</code> -- points to the Maven installation root.
+  <code>PATH=$M2_HOME/bin:$PATH</code> -- preprends Maven's <code>bin/</code> directory to your <code>PATH</code>, which is what makes the <code>mvn</code> command resolvable in any terminal.
+  Without these, you'd have to invoke Maven by its full path every time, e.g., <code>/path/to/apache-maven-3.9.x/bin/mvn -v</code>.</p>
+<p>On macOs/Linux, put those <code>export</code> lines in <code>~/.zshrc</code>, <code>~/.bashrc</code>, or <code>~/.bash_profile</code> so they persist across terminal sessions.</p>
+<p><code>M2_HOME</code> is technically optional on modern Maven -- only <code>PATH</code> is strictly required for the <code>mvn</code> command. But setting both is the conventional, safer approach.</p>
+<p>If you installed Maven via a package manager (Homebrew, SDKMAN, apt, choco), <code>PATH</code> is usually configured automatically -- verify with <code>mvn -v</code> before adding anything manually.</p>
+<ul>
+<li>Verify: <code>mvn -v</code></li>
+</ul>
+<h2 id="generate-a-project">Generate a Project</h2>
+<pre><code class="language-bash">mvn archetype:generate \
+    -DgroupId=io.davidsusanto \
+    -DartifactId=api-test \
+    -DarchetypeArtifactId=maven-archetype-quickstart \
+    -DarchetypeVersion=1.5 \
+    -DinteractiveMode=false
+</code></pre>
+<ul>
+<li><code>archetype:generate</code> is one of the goal of Maven Archetype Plugin -- other plugin are:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Goal</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>archetype:generate</code></td>
+<td>Create a new project from an archetype (interactive or batch mode)</td>
+</tr>
+<tr>
+<td><code>archetype:create-from-project</code></td>
+<td>Turn an existing project into a reusable archetype -- useful if you want to template your API test framework for other teams</td>
+</tr>
+<tr>
+<td><code>archetype:crawl</code></td>
+<td>Crawl a Maven repo and build a catalog of available archetypes</td>
+</tr>
+<tr>
+<td><code>archetype:update-local-catalog</code></td>
+<td>Update your local archetype catalog (<code>~/.m2/archetype-catalog.xml</code>)</td>
+</tr>
+<tr>
+<td><code>archetype:integration-test</code></td>
+<td>Run integration tests on an archetype you're developing</td>
+</tr>
+<tr>
+<td><code>archetype:help</code></td>
+<td>Show plugin help; <code>mvn archetype:help -Dgoal=generate -Ddetail=true</code> lists all parameters for a specific goal</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>mvn archetype:generate</code> without <code>-DarchetypeArtifactId=...</code> drops you into interactive mode with a numbered list of archetype to pick from.</li>
+<li>Interactive mode is Maven's prompt-driven flow where the plugin asks you questions instead of requiring all parameters on the command line.</li>
+<li><code>-DarchetypeArtifactId</code> is the <code>artifactId</code> of the archetype (template) you want to generate your project from.</li>
+<li>A full archetype is identified by three coordinates:</li>
+</ul>
+<p><code>bash
+  -DarchetypeGroupId=org.apache.maven.archetypes
+  -DarchetypeArtifactId=maven-archetype-quickstart
+  -DarchetypeVersion=1.5</code></p>
+<ul>
+<li><code>maven-archetype-quickstart</code> release history:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Notable changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1.0</code>, <code>1.1</code></td>
+<td>Original, very old releases (JUnit 3.8.x)</td>
+</tr>
+<tr>
+<td><code>1.3</code></td>
+<td>JUnit 4</td>
+</tr>
+<tr>
+<td><code>1.4</code></td>
+<td>Junit 4.11, modernized POM</td>
+</tr>
+<tr>
+<td><code>1.5</code></td>
+<td>Latest, published 2024-08-20 -- defaults to Java 17 and JUnit 5.11.0, also generates a <code>.mvn/</code> directory with <code>jvm.config</code> and <code>maven.config</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Common official Apache archetypes:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Archetype</th>
+<th>Generates</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>maven-archetype-quickstart</code></td>
+<td>Minimal Java app with a <code>Main</code> class and one JUnit test (most common starting point)</td>
+</tr>
+<tr>
+<td><code>maven-archetype-simple</code></td>
+<td>Even barer skeleton, no sample code</td>
+</tr>
+<tr>
+<td><code>maven-archetype-webapp</code></td>
+<td>Basic Java web app with <code>web.xml</code> and WAR packaging</td>
+</tr>
+<tr>
+<td><code>maven-archetype-j2ee-simple</code></td>
+<td>Multi-module J2EE skeleton (EJB, web, ear)</td>
+</tr>
+<tr>
+<td><code>maven-archetype-archetype</code></td>
+<td>Template for creating your own archetype</td>
+</tr>
+<tr>
+<td><code>maven-archetype-plugin</code></td>
+<td>Skeleton for building a Maven plugin</td>
+</tr>
+<tr>
+<td><code>maven-archetype-site</code></td>
+<td>Project with Maven site documentation setup</td>
+</tr>
+<tr>
+<td><code>maven-archetype-profiles</code></td>
+<td>Starter demonstrating build profiles</td>
+</tr>
+</tbody>
+</table>
+<h2 id="standard-directory-structure">Standard Directory Structure</h2>
+<pre><code class="language-plain">api-test/
+├── pom.xml
+└── src/
+    ├── main/
+    │   ├── java/
+    │   └── resources/
+    └── test/
+        ├── java/
+        └── resources/
+</code></pre>
+<h2 id="minimal-pomxml-java-17-junit-5">Minimal <code>pom.xml</code> (Java 17, JUnit 5)</h2>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0
+             http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;io.davidsusanto&lt;/groupId&gt;
+    &lt;artifactId&gt;api-test&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+
+    &lt;properties&gt;
+        &lt;maven.compiler.source&gt;17&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;17&lt;/maven.compiler.target&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;junit.version&gt;5.11.4&lt;/junit.version&gt;
+        &lt;surefire.version&gt;3.5.2&lt;/surefire.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+            &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;
+            &lt;version&gt;${junit.version}&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven-compiler-plugin&lt;/artifactId&gt;
+                &lt;version&gt;3.13.0&lt;/version&gt;
+            &lt;/plugin&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+                &lt;artifactId&gt;maven.surefire.plugin&lt;/artifactId&gt;
+                &lt;version&gt;${surefire.version}&lt;/version&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+<ul>
+<li><code>junit-jupier</code> -- your test execution engine. Without it, <code>src/test/java</code> has no framework to run tests against. <code>junit-jupiter</code> is an aggregator artifact that pulls in three pieces:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Pulled-in artifact</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>junit-jupiter-api</code></td>
+<td>The annotations and assertions you write tests with (<code>@Test</code>, <code>assertEquals</code>, etc)</td>
+</tr>
+<tr>
+<td><code>junit-jupiter-params</code></td>
+<td>Parameterized test support (<code>@ParameterizedTest</code>)</td>
+</tr>
+<tr>
+<td><code>junit-jupiter-engine</code></td>
+<td>The runtime that actually discovers and executes Jupiter tests</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>maven-surefire-plugin</code> -- the plugin Maven uses during the <code>test</code> phase to discover and run tests.</li>
+<li>The <code>maven-compiler-plugin</code> is there for the same reason: pin the version so builds are reproducible.</li>
+<li>It's the smallest set that lets you do <code>mvn test</code> reliably and get predictable behavior. You need:</li>
+<li>A test framework (Jupiter)</li>
+<li>A way to run it (Surefire)</li>
+<li>A way to compile sources to your target Java version (Compiler plugin)</li>
+</ul>
+<h2 id="core-lifecycle-commands">Core Lifecycle Commands</h2>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mvn clean</code></td>
+<td>Remove <code>target/</code></td>
+</tr>
+<tr>
+<td><code>mvn compile</code></td>
+<td>Compile <code>src/main/java</code></td>
+</tr>
+<tr>
+<td><code>mvn test</code></td>
+<td>Run unit tests</td>
+</tr>
+<tr>
+<td><code>mvn package</code></td>
+<td>Build JAR</td>
+</tr>
+<tr>
+<td><code>mvn install</code></td>
+<td>Install to local repo (<code>~/.m2/repository</code>)</td>
+</tr>
+<tr>
+<td><code>mvn clean install</code></td>
+<td>Full clean build (your standard verification)</td>
+</tr>
+<tr>
+<td><code>mvn dependency:tree</code></td>
+<td>Inspect transitive dependencies -- useful for the version conflicts you've been resolving</td>
+</tr>
+</tbody>
+</table>
+<h2 id="maven-entries-for-gitignore">Maven entries for <code>.gitignore</code></h2>
+<pre><code class="language-gitignore"># Maven build output
+target/
+
+## Maven internals
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.properties.bak
+
+# Maven Surefire/Failsafe (usually inside target/)
+**/surefire-reports/
+**/failsafe-reports/
+
+# Allure
+allure-results/
+.allure/
+</code></pre>
+<p>What each is:</p>
+<table>
+<thead>
+<tr>
+<th>Entry</th>
+<th>Why ignore</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>target/</code></td>
+<td>The big one. Contains all compiled classes, generated JARs, test reports, site docs, and Surefire/Failsafe output. Regenerated on every build.</td>
+</tr>
+<tr>
+<td><code>pom.xml.tag</code>, <code>pom.xml.releaseBackup</code>, <code>pom.xml.versionBackup</code>, <code>pom.xml.next</code></td>
+<td>Created by <code>maven-release-plugin</code> and <code>versions-maven-plugin</code> during version bumps</td>
+</tr>
+<tr>
+<td><code>release.properties</code></td>
+<td>Transient state file from <code>maven-release-plugin</code></td>
+</tr>
+<tr>
+<td><code>dependency-reduced-pom.xml</code></td>
+<td>Generated by <code>maven-shade-plugin</code></td>
+</tr>
+<tr>
+<td><code>buildNumber.properties</code></td>
+<td>From <code>buildnumber-maven-plugin</code></td>
+</tr>
+<tr>
+<td><code>.mvn/timing.properties</code></td>
+<td>Build timing cache</td>
+</tr>
+<tr>
+<td><code>allure-results/</code></td>
+<td>Allure raw test results (regenerated each run)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-not-to-ignore">What NOT to ignore</h2>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Why keep it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pom.xml</code></td>
+<td>The project itself</td>
+</tr>
+<tr>
+<td><code>.mvn/</code></td>
+<td>Holds <code>jvm.config</code>, <code>maven.config</code>, and Maven Wrapper files -- all should be version-controlled</td>
+</tr>
+<tr>
+<td><code>mvnw</code>, <code>mvnw.cmd</code></td>
+<td>Maven Wrapper scripts</td>
+</tr>
+<tr>
+<td><code>.mvn/wrapper/maven-wrapper.properties</code></td>
+<td>Pins the Maven version for the wrapper</td>
+</tr>
+</tbody>
+</table>
+<p>The Maven Wrapper files are particularly worth keeping -- they solve the "works on my machine" problem by pinning the exact Maven version the project uses.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
